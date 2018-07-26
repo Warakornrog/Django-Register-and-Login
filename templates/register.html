@@ -1,0 +1,33 @@
+ {% extends "base.html"%} 
+ {% load widget_tweaks %}
+ {% block title%}
+ Register
+ {% endblock%}
+
+ 
+{% block content %}
+<div class="container-fluid col-md-4">
+        <p class="display-4 text-center">Register</p>
+    <div class="form-control">
+        <form method="post">
+        {% csrf_token %}
+        {% for field in form %}            
+            <h3>{{ field.label_tag }}</h3><br>
+            
+            {% render_field field class+="form-control" %}
+            {% if field.help_text %}
+            <br>
+                <small style="color: grey">{{ field.help_text|safe }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
+           
+        {% endfor %}
+        <p>
+        <button type="submit" class="btn btn-outline-success">Sign up</button>
+    </p>
+        </form>
+</div>
+</div>
+{% endblock %}

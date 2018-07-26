@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% load widget_tweaks %}{% block title%} Login {% endblock%} 
+{% block content %}
+<div class="container text-center col-md-4">
+    <div class="display-4">Login</div>
+    <form method="post" class="form-control">
+        {% csrf_token %} 
+        {% for field in form %}
+        {{field.label_tag}} 
+        {% render_field field class+="form-control" %}<br> 
+        {% endfor %} 
+        {% if form.errors %}
+        <p class=" label label-danger">
+            Your username and password didn't match. Please try again.
+        </p>
+        {% endif %}
+        <input type="submit" value="Login" class="btn btn-primary pull-right" />
+    </form>
+</div>
+{% endblock content %}
